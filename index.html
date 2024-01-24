@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singly Linked List</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: left;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin-left: 10px;
+        }
+
+        /* Responsive styles */
+        @media only screen and (max-width: 600px) {
+            body {
+                font-size: 14px;
+            }
+
+            button {
+                margin-left: 0;
+                margin-top: 5px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Singly Linked List</h1>
+    <p>When you add the first song to the playlist, it becomes the head of the linked list.</p>
+    <p>The head is the starting point or the first node in the list.</p>
+    <p>Each subsequent song that you add becomes a node in the list,</p>
+    <p>and they are linked together through pointers.</p>
+    <p>Once the second song is added, the head remains the same.</p>
+
+    <!-- Add a form with a file input for adding songs -->
+    <form id="addSongForm">
+        <label for="songFile">Add Song:</label>
+        <input type="file" id="songFile" accept="audio/*" required>
+        <button type="button" onclick="addSong()">Add</button>
+    </form>
+
+    <ul id="playlist">
+        <!-- Playlist items will be added here dynamically -->
+    </ul>
+
+    <!-- Add your JavaScript code here -->
+    <script>
+        function addSong() {
+            // Get the file input element
+            var fileInput = document.getElementById('songFile');
+
+            // Check if a file is selected
+            if (fileInput.files.length > 0) {
+                // Get the selected file
+                var file = fileInput.files[0];
+
+                // Create a new list item for the playlist
+                var listItem = document.createElement('li');
+
+                // Display the filename as the playlist item text
+                listItem.textContent = file.name;
+
+                // Create an audio element
+                var audio = document.createElement('audio');
+                audio.controls = true;
+
+                // Create a source element and set its attributes
+                var source = document.createElement('source');
+                source.src = URL.createObjectURL(file);
+                source.type = 'audio/mp3'; // Change the type based on the file format
+
+                // Append the source element to the audio element
+                audio.appendChild(source);
+
+                // Append the audio element to the list item
+                listItem.appendChild(audio);
+
+                // Create a delete button
+                var deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = function() {
+                    // Remove the list item when the delete button is clicked
+                    listItem.remove();
+                };
+
+                // Append the delete button to the list item
+                listItem.appendChild(deleteButton);
+
+                // Append the new list item to the playlist
+                document.getElementById('playlist').appendChild(listItem);
+            } else {
+                alert('Please select a song to add.');
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
